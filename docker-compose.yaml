@@ -1,0 +1,44 @@
+version: '3'
+# NOTE: Highlight and Unhilight projects you want to test
+services:
+  # proj_1:
+  #   container_name: api_sqlite_tutorial
+  #   build: 
+  #     context: ./go-sqlite3/.
+  #     dockerfile: Dockerfile 
+  #   command: go run .
+  #   volumes:
+  #     -./go-sqlite3:/app
+  #   ports:
+  #     -"8080:8080"
+  proj_2:
+    container_name: api_postgresql_tutorial
+    build: 
+      context: ./go-postgressql/.
+      dockerfile: Dockerfile 
+    command: go run .
+    volumes:
+      -./go-postgressql:/app
+    ports:
+      -"8080:8080"
+    depends_on:
+      - db_proj2
+    
+  # db_proj1:
+  #   container_name: tutorial_db
+  #   image: postgres:13
+  #   volumes:
+  #     -db_proj1_go_data:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_DB: learning_go
+  #     POSTGRES_USER: root
+  #     POSTGRES_PASSWORD: mysecret123
+  db_proj2:
+    container_name: db_proj2
+    image: postgres:13
+    volumes:
+      -db_proj2_go_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: diary_app
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: mysecret123
