@@ -1,4 +1,7 @@
-# Learning Golang Notes
+# Learning Golang Notes by munyalamea@gmail.com
+
+<img src="./go-chef.png">
+
 
 This follows my escapades in the golang world.
 
