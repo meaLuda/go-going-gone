@@ -17,8 +17,8 @@ type User struct{
 
 
 
-// functions
-func (user *User) save(*User, error){
+// Save user registration data[username, password]
+func (user *User) Save()(*User, error){
 	err := database.Database.Create(&user).Error
 
 	if err != nil{
@@ -29,6 +29,7 @@ func (user *User) save(*User, error){
 }
 
 func (user *User) BeforeSave(*gorm.DB) error{
+	// hash password before saving to database
 	passwordHash, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
     if err != nil {
         return err

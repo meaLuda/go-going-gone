@@ -14,13 +14,13 @@ services:
   proj_2:
     container_name: api_postgresql_tutorial
     build: 
-      context: ./go-postgressql/.
+      context: ./go-postgresql/dairy-api/.
       dockerfile: Dockerfile 
     command: go run .
     volumes:
-      -./go-postgressql:/app
+      - ./go-postgresql/dairy-api/:/app
     ports:
-      -"8080:8080"
+      - "8080:8080"
     depends_on:
       - db_proj2
     
@@ -34,11 +34,16 @@ services:
   #     POSTGRES_USER: root
   #     POSTGRES_PASSWORD: mysecret123
   db_proj2:
-    container_name: db_proj2
+    container_name: db_proj2_dairyapi
     image: postgres:13
     volumes:
-      -db_proj2_go_data:/var/lib/postgresql/data
+      - db_proj2_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: diary_app
       POSTGRES_USER: root
       POSTGRES_PASSWORD: mysecret123
+    ports:
+      - '5432:5432'
+
+volumes:
+  db_proj2_data:
